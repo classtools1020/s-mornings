@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S — 早晨日記</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #FAF8F5;
+  --bg-soft: #F2EEE8;
+  --ink: #2D2A26;
+  --ink-soft: #5A5147;
+  --ink-faint: #9A8E7E;
+  --gold: #8A6F4A;
+  --line: #D6CCBE;
+  --green: #4A5C4D;
+  --pink: #D4A89E;
+}
+
+body {
+  font-family: "Noto Serif TC", "Source Han Serif TC", serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.9;
+  font-size: 17px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== 頂部 ========== */
+.masthead {
+  padding: 80px 24px 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 80px;
+}
+.brand {
+  font-size: 14px;
+  letter-spacing: 0.6em;
+  color: var(--ink-soft);
+  font-weight: 300;
+  margin-bottom: 8px;
+  font-family: "Noto Sans TC", sans-serif;
+}
+.brand-name {
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: 0.3em;
+  margin-bottom: 12px;
+}
+.tagline {
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-style: italic;
+  letter-spacing: 0.15em;
+}
+
+/* ========== 主文 ========== */
+main {
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+.date-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  font-size: 13px;
+  color: var(--gold);
+  font-family: "Noto Sans TC", sans-serif;
+  letter-spacing: 0.2em;
+}
+.date-line::before,
+.date-line::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+article h1 {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  text-align: center;
+  color: var(--ink);
+}
+
+article h2 {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--ink-faint);
+  text-align: center;
+  margin-bottom: 64px;
+  letter-spacing: 0.15em;
+  font-style: italic;
+}
+
+article h3 {
+  display: none; /* hide markdown ## inside body */
+}
+
+article p {
+  margin-bottom: 28px;
+  text-indent: 0;
+  color: var(--ink);
+}
+
+article p strong {
+  color: var(--gold);
+  font-weight: 500;
+  display: inline-block;
+  margin-right: 8px;
+  letter-spacing: 0.1em;
+}
+
+article hr {
+  border: none;
+  text-align: center;
+  margin: 48px 0;
+  height: 24px;
+  position: relative;
+}
+article hr::after {
+  content: "✦";
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 0.5em;
+}
+
+article blockquote {
+  border-left: 2px solid var(--gold);
+  padding-left: 24px;
+  margin: 32px 0;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ========== 簽名 ========== */
+.sign {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.sign-name {
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.4em;
+  font-family: "Noto Serif TC", serif;
+  font-style: italic;
+}
+.sign-time {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: 0.2em;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+/* ========== 歸檔 ========== */
+.archive {
+  margin-top: 100px;
+  padding: 40px 24px;
+  background: var(--bg-soft);
+  text-align: center;
+  border-radius: 2px;
+}
+.archive-title {
+  font-size: 12px;
+  color: var(--ink-faint);
+  letter-spacing: 0.4em;
+  margin-bottom: 24px;
+  font-family: "Noto Sans TC", sans-serif;
+}
+.archive-list {
+  list-style: none;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.archive-list li {
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 15px;
+}
+.archive-list li:last-child { border-bottom: none; }
+.archive-list .arc-date {
+  color: var(--ink-faint);
+  font-family: "Noto Sans TC", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+.archive-list a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  text-align: left;
+  flex: 1;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.archive-list a:hover {
+  color: var(--gold);
+}
+
+/* ========== 頁尾 ========== */
+footer {
+  margin-top: 80px;
+  padding: 40px 24px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.3em;
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+/* ========== 響應式 ========== */
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .brand-name { font-size: 36px; }
+  article h1 { font-size: 30px; }
+  article h2 { font-size: 15px; margin-bottom: 48px; }
+  .masthead { padding: 60px 24px 32px; margin-bottom: 60px; }
+  main { padding: 0 20px 80px; }
+}
+
+/* 進入動畫 */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+article {
+  animation: fadeUp 0.8s ease-out;
+}
+.masthead {
+  animation: fadeUp 0.6s ease-out;
+}
+
+/* 印刷感 */
+::selection {
+  background: var(--gold);
+  color: var(--bg);
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="brand">S．早晨日記</div>
+  <div class="brand-name">S</div>
+  <div class="tagline">每天 5:00 一篇，寫給還沒醒過來的自己</div>
+</header>
+
+<main>
+  <div class="date-line" id="dateLine">2026 年 5 月 5 日　週二</div>
+
+  <article id="article">
+    <!-- 內容由 JS 注入 -->
+  </article>
+
+  <div class="sign">
+    <div class="sign-name">— S</div>
+    <div class="sign-time" id="signTime">2026.05.05　05:00 寫於書桌</div>
+  </div>
+
+  <section class="archive">
+    <div class="archive-title">歷　日　記</div>
+    <ul class="archive-list" id="archiveList">
+      <!-- by JS -->
+    </ul>
+  </section>
+</main>
+
+<footer>
+  S　│　獨立書寫　│　無社群　無訂閱　無廣告
+</footer>
+
+<script>
+// =========== 文章資料 ===========
+const posts = [
+  {
+    date: "2026-05-05",
+    weekday: "週二",
+    title: "五月的早晨，我把所有黑色都丟了",
+    subtitle: "四十歲的衣櫃整理筆記",
+    signTime: "2026.05.05　05:00 寫於書桌",
+    body: `
+<p>五點的早晨，光從東邊那扇窗進來。</p>
+<p>我把衣櫃打開，所有衣服倒在床上。三十六件。</p>
+<p>裡面有十九件黑色。我以前以為我喜歡黑色，因為「黑色顯瘦」「黑色百搭」「黑色不會出錯」。</p>
+<p>今天早上我發現——</p>
+<p>我不喜歡黑色。我只是怕。</p>
+
+<hr>
+
+<p>我怕穿亮的會被看見。</p>
+<p>我怕穿淺色會顯胖。</p>
+<p>我怕穿圖案的會被說花。</p>
+<p>四十歲之前，我用黑色保護自己。<br>
+四十歲那年，我發現黑色已經不是保護，是一種僵硬的習慣。</p>
+<p>今天早上五點，我把那十九件黑色一件件折好，放進一個大紙袋。</p>
+<p>放進去的時候我沒想「以後不穿黑色了」。我只想——</p>
+<blockquote>「現在這個版本的我，不是黑色的。」</blockquote>
+
+<hr>
+
+<p>留下來的衣服，分成三個顏色——</p>
+<p><strong>霧灰白</strong>　洗到第八次的麻襯衫。穿起來像剛醒的樣子。</p>
+<p><strong>墨　綠</strong>　去年京都旅行買的那件。穿起來像走在森林邊。</p>
+<p><strong>深　藍</strong>　父親的舊襯衫，我把它收腰改了。穿起來像有人在背後撐著。</p>
+<p>三個顏色。十七件衣服。</p>
+<p>每件都記得它的故事。</p>
+
+<hr>
+
+<p>我以前的衣櫃裡，有六件「以為自己有一天會穿」的衣服——</p>
+<p>兩件正式套裝，可能某次重要場合會穿。<br>
+兩件鮮豔花襯衫，可能心情好的某一天會穿。<br>
+兩件絲質洋裝，可能某個約會會穿。</p>
+<p>那「某一天」從來沒來過。</p>
+<p>今天早上我懂了。<br>
+那「某一天」不會來，因為穿那些衣服的人，不是我。<br>
+是我幻想中的另一個人。</p>
+<p>我把幻想送出門了。<br>
+留下我自己。</p>
+
+<hr>
+
+<p>我把紙袋拿到門口。送給社區回收的阿姨。</p>
+<p>阿姨說「這些衣服很好啊，怎麼不穿了？」</p>
+<p>我笑了一下。沒回答。</p>
+<p>回答需要十分鐘，但我來不及——五點五十了，第二杯咖啡要涼了。</p>
+<p>我回家，繼續寫東西。</p>
+<p>衣櫃變輕了。我也是。</p>
+
+<hr>
+
+<p>如果妳問我為什麼丟黑色——</p>
+<p>因為我四十歲了。我不再有時間穿「為了不被看見」的衣服。</p>
+<p>我穿，是要被看見。<br>
+不是被別人，是被自己。</p>
+`
+  },
+  // 預告／預存（之後的日期由 cron job 或週寫入）
+  {
+    date: "2026-05-04",
+    weekday: "週一",
+    title: "五點的我",
+    subtitle: "為什麼我把早晨 90 分鐘偷回來",
+    signTime: "2026.05.04　05:00 寫於書桌",
+    body: `<p>每天早上五點，鬧鐘響。</p>
+<p>我不喜歡這個鬧鐘的聲音，但我不討厭五點。</p>
+<p>（內文略，請見 <code>blog/2026-05-05_S日常_五點的我.md</code>）</p>`
+  }
+];
+
+// =========== 顯示邏輯 ===========
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+
+function renderPost(post) {
+  const article = document.getElementById('article');
+  article.innerHTML = `
+    <h1>${post.title}</h1>
+    <h2>${post.subtitle}</h2>
+    ${post.body}
+  `;
+  // 格式化日期顯示
+  const [y, m, d] = post.date.split('-');
+  document.getElementById('dateLine').textContent =
+    `${y} 年 ${parseInt(m)} 月 ${parseInt(d)} 日　${post.weekday}`;
+  document.getElementById('signTime').textContent = post.signTime;
+}
+
+function renderArchive() {
+  const list = document.getElementById('archiveList');
+  // 排除今天那篇
+  const today = todayStr();
+  const others = posts.filter(p => p.date !== today && p.date < today);
+  if (others.length === 0) {
+    list.innerHTML = '<li style="justify-content:center; color:var(--ink-faint); border:none;">明天起，這裡會慢慢長出來</li>';
+    return;
+  }
+  list.innerHTML = others.map((p, i) => `
+    <li>
+      <span class="arc-date">${p.date}</span>
+      <a href="javascript:void(0)" onclick="loadPost(${posts.indexOf(p)})">${p.title}</a>
+    </li>
+  `).join('');
+}
+
+function loadPost(idx) {
+  renderPost(posts[idx]);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// 找今日對應的文章；找不到就最新
+function init() {
+  const today = todayStr();
+  let post = posts.find(p => p.date === today);
+  if (!post) {
+    // 找日期 <= today 的最新
+    const past = posts.filter(p => p.date <= today).sort((a, b) => b.date.localeCompare(a.date));
+    post = past[0] || posts[0];
+  }
+  renderPost(post);
+  renderArchive();
+}
+
+init();
+</script>
+
+</body>
+</html>
