@@ -1,0 +1,48 @@
+name: 🌅 每日早晨日記
+
+on:
+  schedule:
+    # UTC 21:00 = 台灣時間隔日 05:00
+    - cron: '0 21 * * *'
+  workflow_dispatch: # 也可以在網頁手動觸發
+
+permissions:
+  contents: write
+
+jobs:
+  write-morning-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Set Taipei timezone
+        run: |
+          sudo timedatectl set-timezone Asia/Taipei || true
+          echo "TZ=Asia/Taipei" >> $GITHUB_ENV
+
+      - name: Generate today's post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TZ: Asia/Taipei
+        run: python scripts/generate_post.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "S"
+          git config user.email "s@classtools1020.github.io"
+          git add index.html blog/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🌅 $(TZ=Asia/Taipei date +%Y-%m-%d) morning"
+            git push
+          fi
